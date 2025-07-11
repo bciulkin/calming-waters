@@ -4,7 +4,7 @@
 A simulation of a tank in which fish (ASCII) move can have different behaviors: e.g. swimming, looking for food, avoiding each other.
 
 ## Feature list
-- [ ] Drawing a rectangle in the terminal (e.g., 20x10)
+- [X] Drawing a rectangle in the terminal (e.g., 20x10)
 - [ ] Representing a fish as a struct with position and direction
 - [ ] Main loop: clear screen, update fish positions, draw again
 - [ ] Random movement of fish
