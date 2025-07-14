@@ -10,16 +10,7 @@ func main() {
 	ticker := time.NewTicker(500 * time.Millisecond)
 	done := make(chan bool)
 
-	// Initialize fish
-	fish := make([]display.Fish, constants.NumFish)
-	for i := range fish {
-		fish[i] = display.Fish{
-			X:      rand.Intn(constants.ScreenWidth),
-			Y:      rand.Intn(constants.ScreenHeight) + 1,
-			Symbol: []string{"><>", "><((º>"}[rand.Intn(2)],
-			Speed:  rand.Intn(2) + 1,
-		}
-	}
+
 
 	go func() {
 		for {
@@ -27,7 +18,7 @@ func main() {
 			case <- done:
 				return
 			case <-ticker.C:
-				play(fish)
+				play()
 			}
 		}
 	}()
@@ -37,9 +28,9 @@ func main() {
 	done <- true
 }
 
-func play(fish []display.Fish) {
+func play() {
 	display.ClearScreen()
 	display.DrawBox(constants.ScreenWidth, constants.ScreenHeight)
-	display.DrawFish(fish)
-	display.UpdateFish(fish)
+	display.DrawFish()
+	display.UpdateFish()
 }
