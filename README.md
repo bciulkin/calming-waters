@@ -5,8 +5,8 @@ A simulation of a tank in which fish (ASCII) move can have different behaviors: 
 
 ## Feature list
 - [X] Drawing a rectangle in the terminal (e.g., 20x10)
-- [ ] Representing a fish as a struct with position and direction
-- [ ] Main loop: clear screen, update fish positions, draw again
+- [X] Representing a fish as a struct with position and direction
+- [X] Main loop: clear screen, update fish positions, draw again
 - [ ] Random movement of fish
 - [ ] Aquarium boundaries (fish turn)
 - [ ] Fish do not "hit" each other
