@@ -5,4 +5,3 @@ const (
 	ScreenHeight = 20
 	NumFish      = 5
 )
-

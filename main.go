@@ -1,9 +1,15 @@
 package main
 import (
 	"calming-waters/display"
-	"calming-waters/constants"
+	"calming-waters/model"
 	"math/rand"
 	"time"
+)
+
+const (
+	ScreenWidth  = 80
+	ScreenHeight = 20
+	NumFish      = 5
 )
 
 func main() {
@@ -11,11 +17,11 @@ func main() {
 	done := make(chan bool)
 
 	// Initialize fish
-	fish := make([]display.Fish, constants.NumFish)
+	fish := make([]model.Fish, NumFish)
 	for i := range fish {
-		fish[i] = display.Fish{
-			X:      rand.Intn(constants.ScreenWidth),
-			Y:      rand.Intn(constants.ScreenHeight) + 1,
+		fish[i] = model.Fish{
+			X:      rand.Intn(ScreenWidth),
+			Y:      rand.Intn(ScreenHeight) + 1,
 			Symbol: []string{"><>", "><((º>"}[rand.Intn(2)],
 			Speed:  rand.Intn(2) + 1,
 		}
@@ -37,9 +43,11 @@ func main() {
 	done <- true
 }
 
-func play(fish []display.Fish) {
+func play(fish []model.Fish) {
 	display.ClearScreen()
-	display.DrawBox(constants.ScreenWidth, constants.ScreenHeight)
-	display.DrawFish(fish)
-	display.UpdateFish(fish)
+	display.DrawBox(ScreenWidth, ScreenHeight)
+	for i := range fish {
+		fish[i].DrawFish()
+		fish[i].UpdateFish()
+	}
 }
