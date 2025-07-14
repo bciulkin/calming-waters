@@ -7,21 +7,23 @@ import (
 )
 
 const (
-	ScreenWidth  = 80
-	ScreenHeight = 20
-	NumFish      = 5
+	screenWidth   = 90
+	screenHeight  = 30
+	numFish       = 15
+	asciiredColor = "\033[31m"
+	resetColor    = "\033[0m"
 )
 
 func main() {
-	ticker := time.NewTicker(500 * time.Millisecond)
+	ticker := time.NewTicker(200 * time.Millisecond)
 	done := make(chan bool)
 
 	// Initialize fish
-	fish := make([]model.Fish, NumFish)
+	fish := make([]model.Fish, numFish)
 	for i := range fish {
 		fish[i] = model.Fish{
-			X:      rand.Intn(ScreenWidth),
-			Y:      rand.Intn(ScreenHeight) + 1,
+			X:      rand.Intn(screenWidth),
+			Y:      rand.Intn(screenHeight) + 1,
 			Symbol: []string{"><>", "><((º>"}[rand.Intn(2)],
 			Speed:  rand.Intn(2) + 1,
 		}
@@ -38,14 +40,14 @@ func main() {
 		}
 	}()
 
-	time.Sleep(5000 * time.Millisecond)
+	time.Sleep(50000 * time.Millisecond)
 	ticker.Stop()
 	done <- true
 }
 
 func play(fish []model.Fish) {
 	display.ClearScreen()
-	display.DrawBox(ScreenWidth, ScreenHeight)
+	display.DrawBox(screenWidth, screenHeight)
 	for i := range fish {
 		fish[i].DrawFish()
 		fish[i].UpdateFish()

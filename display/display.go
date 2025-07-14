@@ -4,6 +4,11 @@ import (
 	"fmt"
 )
 
+const (
+	asciiRedColor   = "\033[31m"
+	asciiResetColor = "\033[0m"
+)
+
 func DrawBox(width, height int) {
 	if width < 2 || height < 2 {
 		fmt.Println("Width and height must be at least 2")
@@ -11,7 +16,7 @@ func DrawBox(width, height int) {
 	}
 
 	// Top border
-	fmt.Print("┌")
+	fmt.Print(asciiRedColor + "┌")
 	for i := 0; i < width-2; i++ {
 		fmt.Print("─")
 	}
@@ -31,7 +36,7 @@ func DrawBox(width, height int) {
 	for i := 0; i < width-2; i++ {
 		fmt.Print("─")
 	}
-	fmt.Println("┘")
+	fmt.Println("┘" + asciiResetColor)
 }
 
 func ClearScreen() {
