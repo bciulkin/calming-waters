@@ -1,4 +1,5 @@
 package main
+
 import (
 	"calming-waters/display"
 	"calming-waters/model"
@@ -6,27 +7,15 @@ import (
 	"time"
 )
 
-const (
-	screenWidth   = 90
-	screenHeight  = 30
-	numFish       = 15
-	asciiredColor = "\033[31m"
-	resetColor    = "\033[0m"
-)
-
 func main() {
-	ticker := time.NewTicker(200 * time.Millisecond)
+	rand.Seed(time.Now().UnixNano())
+	ticker := time.NewTicker(300 * time.Millisecond)
 	done := make(chan bool)
 
 	// Initialize fish
 	fish := make([]model.Fish, numFish)
 	for i := range fish {
-		fish[i] = model.Fish{
-			X:      rand.Intn(screenWidth),
-			Y:      rand.Intn(screenHeight) + 1,
-			Symbol: []string{"><>", "><((º>"}[rand.Intn(2)],
-			Speed:  rand.Intn(2) + 1,
-		}
+		fish[i] = model.NewFish(screenWidth, screenHeight)
 	}
 
 	go func() {
