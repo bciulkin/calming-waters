@@ -7,14 +7,6 @@ import (
 	"time"
 )
 
-const (
-	screenWidth   = 90
-	screenHeight  = 30
-	numFish       = 15
-	asciiredColor = "\033[31m"
-	resetColor    = "\033[0m"
-)
-
 func main() {
 	rand.Seed(time.Now().UnixNano())
 	ticker := time.NewTicker(300 * time.Millisecond)
