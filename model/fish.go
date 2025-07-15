@@ -43,7 +43,6 @@ func NewFish(width, height int) Fish {
 	}
 	
 	return f
-
 }
 
 func (f *Fish) DrawFish() {
