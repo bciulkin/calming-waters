@@ -45,14 +45,14 @@ func NewFish(width, height int) Fish {
 	return f
 }
 
-func (f *Fish) DrawFish() {
-	// if f.X < f.ScreenWidth {
+func (f *Fish) DrawFish(width, height int) {
+	if f.X < width {
 		display.MoveCursor(f.Y, f.X)
 		fmt.Print(f.Symbol)
-	// }
+	}
 }
 
-func (f *Fish) UpdateFish() {
+func (f *Fish) UpdateFish(width, height int) {
 	if (f.Direction == Right) {
 		f.X += f.Speed
 	} else {
@@ -63,13 +63,13 @@ func (f *Fish) UpdateFish() {
 		f.Y += rand.Intn(3) - 1 // -1, 0 or +1
 		if f.Y < 1 {
 			f.Y = 1
-		} 
-		// else if f.Y > constants.ScreenHeight {
-			// f.Y = constants.ScreenHeight
-		// }
+		}
+		if f.Y > height {
+			f.Y = height
+		}
 	}
 	// Wrap around
-	// if f.X > constants.ScreenWidth {
-		// f.X = 0
-	// }
+	if f.X > width {
+		f.X = 0
+	}
 }

@@ -38,7 +38,7 @@ func play(fish []model.Fish) {
 	display.ClearScreen()
 	display.DrawBox(screenWidth, screenHeight)
 	for i := range fish {
-		fish[i].DrawFish()
-		fish[i].UpdateFish()
+		fish[i].DrawFish(screenWidth, screenHeight)
+		fish[i].UpdateFish(screenWidth, screenHeight)
 	}
 }
