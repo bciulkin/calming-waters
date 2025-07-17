@@ -28,21 +28,29 @@ type Fish struct {
 	Direction DirectionEnum
 }
 
+const (
+	symbols = []string{"><>", "<><", "><((º>", "<º))><"}
+)
+
 func NewFish(width, height int) Fish {
 	f := Fish{
-		X:      rand.Intn(width - 1) + 1,
-		Y:      rand.Intn(height - 1) + 1,
-		Speed:  rand.Intn(2) + 1,
+		X:         rand.Intn(width) + 1,
+		Y:         rand.Intn(height) + 1,
+		Speed:     rand.Intn(2) + 1,
 		Direction: direction(),
 	}
+	f.swapDirection()
 
+	return f
+}
+
+func (f *Fish) swapDirection() {
 	if (f.Direction == Right) {
-		f.Symbol = []string{"><>", "><((º>"}[rand.Intn(2)]
+		f.Symbol = symbols[rand.Intn(2)]
 	} else {
-		f.Symbol = []string{"<><", "<º))><"}[rand.Intn(2)]
+		f.Symbol = symbols[rand.Intn(2) + 2]
 	}
 	
-	return f
 }
 
 func (f *Fish) DrawFish(width, height int) {
@@ -68,8 +76,15 @@ func (f *Fish) UpdateFish(width, height int) {
 			f.Y = height
 		}
 	}
+
 	// Wrap around
-	if f.X > width {
-		f.X = 0
+	if (f.X > width - 1 - len(f.Symbol)) {
+		f.Direction = Left
+		f.swapDirection()
+	}
+
+	if f.X < 1 {
+		f.Direction = Right
+		f.swapDirection()
 	}
 }
