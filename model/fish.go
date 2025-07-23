@@ -29,7 +29,7 @@ type Fish struct {
 }
 
 const (
-	symbols = []string{"><>", "<><", "><((º>", "<º))><"}
+	symbols = [4]string {"><>", "<><", "><((º>", "<º))><"}
 )
 
 func NewFish(width, height int) Fish {
