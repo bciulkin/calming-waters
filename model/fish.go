@@ -28,9 +28,8 @@ type Fish struct {
 	Direction DirectionEnum
 }
 
-const (
-	symbols = [4]string {"><>", "<><", "><((º>", "<º))><"}
-)
+var symbols = [4]string {"><>", "<><", "><((º>", "<º))><"}
+
 
 func NewFish(width, height int) Fish {
 	f := Fish{
@@ -45,6 +44,7 @@ func NewFish(width, height int) Fish {
 }
 
 func (f *Fish) swapDirection() {
+
 	if (f.Direction == Right) {
 		f.Symbol = symbols[rand.Intn(2)]
 	} else {
