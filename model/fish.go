@@ -23,6 +23,7 @@ func direction() DirectionEnum {
 
 type Fish struct {
 	X, Y   int
+	Template [2]string
 	Symbol string
 	Speed  int
 	Direction DirectionEnum
@@ -39,27 +40,26 @@ func NewFish(width, height int) Fish {
 		Speed:     rand.Intn(2) + 1,
 		Direction: direction(),
 	}
-	f.initSymbol()
+	f.initTemplate()
+	f.swapDirection()
 
 	return f
 }
 
-func (f *Fish) initSymbol() {
-	if (f.Direction == Right) {
-		f.Symbol = symbols1[rand.Intn(1)]
+func (f *Fish) initTemplate() {
+	if (rand.Intn(2) == 0) {
+		f.Template = symbols1
 	} else {
-		f.Symbol = symbols1[rand.Intn(1) + 1]
-	}
-	
+		f.Template = symbols2
+	}	
 }
 
 func (f *Fish) swapDirection() {
 	if (f.Direction == Right) {
-		f.Symbol = symbols1[rand.Intn(1)]
+		f.Symbol = f.Template[0]
 	} else {
-		f.Symbol = symbols1[rand.Intn(1) + 1]
+		f.Symbol = f.Template[1]
 	}
-	
 }
 
 func (f *Fish) DrawFish(width, height int) {
