@@ -17,15 +17,15 @@ func DrawBox(width, height int) {
 
 	// Top border
 	fmt.Print(asciiRedColor + "┌")
-	for i := 0; i < width-2; i++ {
+	for range width - 2 {
 		fmt.Print("─")
 	}
 	fmt.Println("┐")
 
 	// Middle rows
-	for i := 0; i < height-2; i++ {
+	for range height - 2 {
 		fmt.Print("│")
-		for j := 0; j < width-2; j++ {
+		for range width - 2 {
 			fmt.Print(" ")
 		}
 		fmt.Println("│")
@@ -33,7 +33,7 @@ func DrawBox(width, height int) {
 
 	// Bottom border
 	fmt.Print("└")
-	for i := 0; i < width-2; i++ {
+	for range width - 2 {
 		fmt.Print("─")
 	}
 	fmt.Println("┘" + asciiResetColor)
