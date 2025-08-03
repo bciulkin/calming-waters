@@ -6,14 +6,14 @@ import (
 	"fmt"
 )
 
-type DirectionEnum int
+type directionEnum int
 
 const (
-	Right DirectionEnum = iota
+	Right directionEnum = iota
 	Left
 )
 
-func direction() DirectionEnum {
+func direction() directionEnum {
 	if (rand.Intn(2) == 1) {
 		return Right
 	} else {
@@ -22,11 +22,11 @@ func direction() DirectionEnum {
 }
 
 type Fish struct {
-	X, Y   int
-	Template [2]string
-	Symbol string
-	Speed  int
-	Direction DirectionEnum
+	x, y   int
+	template [2]string
+	symbol string
+	speed  int
+	direction directionEnum
 }
 
 var symbols1 = [2]string {"><>", "<><"}
@@ -35,10 +35,10 @@ var symbols2 = [2]string {"><((º>", "<º))><"}
 
 func NewFish(width, height int) Fish {
 	f := Fish{
-		X:         rand.Intn(width),
-		Y:         rand.Intn(height),
-		Speed:     rand.Intn(2) + 1,
-		Direction: direction(),
+		x:         rand.Intn(width),
+		y:         rand.Intn(height),
+		speed:     rand.Intn(2) + 1,
+		direction: direction(),
 	}
 	f.initTemplate()
 	f.swapDirection()
@@ -48,53 +48,53 @@ func NewFish(width, height int) Fish {
 
 func (f *Fish) initTemplate() {
 	if (rand.Intn(2) == 0) {
-		f.Template = symbols1
+		f.template = symbols1
 	} else {
-		f.Template = symbols2
+		f.template = symbols2
 	}	
 }
 
 func (f *Fish) swapDirection() {
-	if (f.Direction == Right) {
-		f.Symbol = f.Template[0]
+	if (f.direction == Right) {
+		f.symbol = f.template[0]
 	} else {
-		f.Symbol = f.Template[1]
+		f.symbol = f.template[1]
 	}
 }
 
 func (f *Fish) DrawFish(width, height int) {
-	if f.X < width {
-		display.MoveCursor(f.Y, f.X)
-		fmt.Print(f.Symbol)
+	if f.x < width {
+		display.MoveCursor(f.y, f.x)
+		fmt.Print(f.symbol)
 	}
 }
 
 func (f *Fish) UpdateFish(width, height int) {
-	if (f.Direction == Right) {
-		f.X += f.Speed
+	if (f.direction == Right) {
+		f.x += f.speed
 	} else {
-		f.X -= f.Speed
+		f.x -= f.speed
 	}
 
 	// Random vertical movement
 	if rand.Intn(10) > 7 {
-		f.Y += rand.Intn(3) - 1 // -1, 0 or +1
-		if f.Y < 1 {
-			f.Y = 1
+		f.y += rand.Intn(3) - 1 // -1, 0 or +1
+		if f.y < 1 {
+			f.y = 1
 		}
-		if f.Y > height {
-			f.Y = height
+		if f.y > height {
+			f.y = height
 		}
 	}
 
 	// Wrap around
-	if (f.X > width - 1 - len(f.Symbol) && f.Direction == Right) {
-		f.Direction = Left
+	if (f.x > width - 1 - len(f.symbol) && f.direction == Right) {
+		f.direction = Left
 		f.swapDirection()
 	}
 
-	if f.X < 1 + len(f.Symbol) && f.Direction == Left {
-		f.Direction = Right
+	if f.x < 1 + len(f.symbol) && f.direction == Left {
+		f.direction = Right
 		f.swapDirection()
 	}
 }
